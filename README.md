@@ -12,12 +12,9 @@
 
 ## Introduction
 
-This lab provides a quick summation of the basics of JavaScript functions. You
-should have encountered all these ideas before now, but we're going to give a
-quick summary of what the rest of this module assumes you know.
-
-Be sure to take time to experiment or read up on a concept if you're not too
-comfortable with the idea.
+This lab provides a summation of the basics of JavaScript functions. Most of
+these ideas should feel familiar.  Be sure to take time to experiment or read
+up on a concept if you're not comfortable with the idea.
 
 ## Define a Function Using Function Declaration
 
@@ -182,7 +179,7 @@ Interestingly, any variables, functions, `Array`s, etc. that are defined
 _inside_ of the function expression's body _can't_ be seen _outside_ of the
 IIFE.  It's like opening up a micro-dimension, a bubble-universe, doing all the
 work you could ever want to do there, and then closing the space-time rift.
-IIFEs are definitely sci-fiction or comic book stuff. 
+IIFEs are definitely science fiction or comic book stuff.
 
 
 ```js
@@ -198,22 +195,87 @@ IIFEs are definitely sci-fiction or comic book stuff.
 We'll see some of the practical power of "hiding things" in IIFEs a little
 later in this lesson.
 
-> **SYNTAX QUESTION** Some keen-eyed readers might think, why not simply write IIFEs
-> like so: `function(x){ return x + 2 }(2) //=> 4`. This does not work. The
-> reason has to do with how JavaScript reads functions. JavaScript needs the
-> "hint" from the programmer that `function(){...}` forms a unit, thus `()`.
+> **(ADVANCED) SYNTAX QUESTION** Some keen-eyed readers might think, why add
+> parentheses around the function expression. Why not:
+>
+> ```js
+> function(x){ return x + 2 }(2) //=> ERROR
+> ```
+>
+> instead of:
+>
+> ```js
+> (function(x){ return x + 2 }()2) //=> 4
+> ```
+>
+> The reason is that JavaScript gets confused by all those bits of special
+> symbols and operators sitting right next to each other. Just as we find the way
+> ancient Romans wrote (all-caps, no spaces) VERYHARDTOREADANDHARDTOKEEPTRACKOF,
+> JavaScript needs those "extra" parentheses to tell what's part of the function
+> expression and what's part of the invocation.
 
 ## Define the Term "Function-level Scope"
 
 JavaScript exhibits "Function-level" scope. This means that if a function is
 defined _inside another_ function, the inner function has access to all the
 parameters (variables passed in) as well as any variables defined in the
-function. This is where people really start to get baffled by JavaScript.
+function. Also: this is where people really start to get awed by JavaScript.
+
+Consider this code:
 
 ```js
-function outer(greeting, msg="It's a fine day to") {
-  return function(name, lang="Python") { // The "inner" function
-    return `${greeting}, ${name}! ${msg} learn ${lang}`
+function outer(greeting, msg="It's a fine day to learn") { // 2
+  let innerFunction =  function(name, lang="Python") { // 3
+    return `${greeting}, ${name}! ${msg} ${lang}` // 4
+  }
+  return innerFunction("student", "JavaScript") // 5
+}
+
+outer("Hello") // 1
+//=> "Hello, student! It's a fine day to learn JavaScript"
+```
+
+1. We call `outer`, passing `"Hello"` as an argument
+2. The argument (`"Hello"`) is saved in `outer`'s `greeting` parameter. The
+   other parameter, `msg` is set to a default value
+3. Here's our old friend the function expression. It expects two arguments
+   which it stores in the parameters `name` and `lang` with `lang` being set as
+   a default to `"Python"`. This expression is saved in the local variable
+   `innerFunction`
+4. Inside `innerFunction` we make use of both the parameters `name` and `lang`
+   ***as well as*** the parameters of innerFunction's containing (parent)
+   function. `innerFunction` gets access to those variables
+5. Inside `outer`, we invoke `innerFunction`
+
+This might look a little bit weird, but it generally makes sense to our
+intuition about scopes: inner things can see their parent outer things. But
+with a simple change, something miraculous can happen
+
+```js
+function outer(greeting, msg="It's a fine day to learn") { // 2
+  let innerFunction =  function(name, lang="Python") { // 3
+    return `${greeting}, ${name}! ${msg} ${lang}` // 4
+  }
+  return innerFunction
+}
+
+outer("Hello")("student", "JavaScript") // 1, 5
+//=> "Hello, student! It's a fine day to learn JavaScript"
+```
+
+Amazingly, this code works ***the exact same***. Even if the inner function
+`innerFunction` is invoked **outside** the parent function, it still has access
+to those parent function's variables. It's like a little wormhole in space-time
+to the `outer`'s scope!
+
+Let's tighten this code up once more instead of assigning the function
+expression to `innerFunction`, let's just return the function expression.
+
+
+```js
+function outer(greeting, msg="It's a fine day to learn") {
+  return function(name, lang="Python") {
+    return `${greeting}, ${name}! ${msg} ${lang}`
   }
 }
 
@@ -221,11 +283,12 @@ outer("Hello")("student", "JavaScript")
 //=> "Hello, student! It's a fine day to learn JavaScript"
 ```
 
-Our "inner" function is a returned **anonymous function**. Because it came into
-existence, it inherited the values in `outer`'s parameters `greeting` and
-`msg`. When we invoked `outer` we provided the arguments for `greeting` and
-left `msg` as the default. `outer` then returned an anonymous function that had
-its uses of `greeting` and `msg` set. It was almost as if `outer` returned:
+Our "inner" function is now a returned **anonymous function**.  To repeat: When
+it came into existence, it inherited the values in `outer`'s parameters
+`greeting` and `msg`. When we invoked `outer` we provided the arguments for
+`greeting` and left `msg` as the default. `outer` then returned an anonymous
+function that had its uses of `greeting` and `msg` set. It was almost as if
+`outer` returned:
 
 
 ```js
@@ -237,10 +300,25 @@ return function(name, lang="Python") { // The "inner" function
 We invoked this returned or _"inner" function"_ by adding `()` and passing the
 arguments `"student"` and `"JavaScript"` which were then loaded into `name` and
 `lang` inside the inner function. This filled in the final two values inside of
-the template string and effectively returned: 
+the template string and effectively returned:
 
 ```js
   return `Hello, student! It's a fine day to learn JavaScript`
+//=> "Hello, student! It's a fine day to learn JavaScript"
+```
+
+Keep in mind, it's not the case that we have to invoke functions like this:
+
+```js
+outer("Hello")("student", "JavaScript")
+```
+
+We could:
+
+```js
+let storedFunction = outer("Hello")
+// ... lots of other code
+storedFunction("student", "JavaScript")
 //=> "Hello, student! It's a fine day to learn JavaScript"
 ```
 
