@@ -372,6 +372,12 @@ a `String` that will be used to create visual pizzazz. It should default to
 ..."`. The `...` should be the argument that was passed in to this inner
 function (or the default).
 
+### Additional Practice in Lab-Driven Development
+
+To keep you fresh on building implementations to satsify tests, we're not going
+to describe the implementation of the final two test sections. Use the tests to
+guide you in feeling confident working with functions.
+
 ## Conclusion
 
 In this lesson, we've covered the basics of function declaration, invocation,

@@ -44,4 +44,69 @@ describe("index.js", () => {
       expect(emphatic).to.equal("You are ||a dedicated programmer||!")
     });
   })
+
+  describe("defines an object called Calculator", function() {
+    describe("that has a method called add", function() {
+      it("function exists", function() {
+        expect(Calculator.add).to.exist
+      })
+
+      it("calculates 1 + 3", function() {
+        expect(Calculator.add(1,3)).to.equal(4)
+      })
+    })
+
+    describe("that has a method called subtract", function() {
+      it("function exists", function() {
+        expect(Calculator.add).to.exist
+      })
+
+      it("calculates 1 - 3", function() {
+        expect(Calculator.subtract(1,3)).to.equal(-2)
+      })
+    })
+
+    describe("that has a method called multiply", function() {
+      it("function exists", function() {
+        expect(Calculator.multiply).to.exist
+      })
+
+      it("calculates 1 * 3", function() {
+        expect(Calculator.multiply(1,3)).to.equal(3)
+      })
+    })
+
+    describe("that has a method called divide", function() {
+      it("function exists", function() {
+        expect(Calculator.divide).to.exist
+      })
+
+      it("calculates 10 / 5", function() {
+        expect(Calculator.divide(10,5)).to.equal(2)
+      })
+    })
+  })
+
+  describe("Defines a method called actionApplyer", function() {
+    it("exists", function() {
+        expect(actionApplyer).to.exist
+    })
+
+    describe("receives two arguments: a starting integer and an array of functions", function() {
+      it("returns the given starting point, unchanged, when the array is empty", function() {
+        expect(actionApplyer(0, [])).to.equal(0)
+      })
+
+      it("returns the correctly changed value", function() {
+        arrayOfTransforms = [
+          function(a){ return a * 2 },
+          function(a){ return a + 1000},
+          function(a){ return a % 7 }
+        ]
+        expect(actionApplyer(13, arrayOfTransforms)).to.equal(4)
+      })
+    })
+
+
+  })
 })
