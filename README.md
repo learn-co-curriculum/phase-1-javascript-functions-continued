@@ -364,18 +364,28 @@ console.log(`The base was ${theBase()}`)
 // OUTPUT: The base was 3
 ```
 
-**LAB**: Implement a function called `wrapAdjective`. It should take as parameter
-a `String` that will be used to create visual pizzazz. It should default to
-`"*"`. The `wrapAdjective` should return a function.  The returned function (or
-"inner function") should take a single parameter that should default to
-`"special"`. The inner function should return a `String` of the form `"You are
-..."`. The `...` should be the argument that was passed in to this inner
-function (or the default).
+**LAB**:
 
-### Additional Practice in Lab-Driven Development
+* Implement a function called `wrapAdjective`.
+  * It should return a function
+    * This "inner" function should:
+      * take a single parameter that should default to `"special"`. Name it
+        however you wish.
+      * return a `String` of the form "You are ..." where `...` should be the
+        adjective this function received wrapped in visual flair
+  * It should take as parameter a `String` that will be used to create visual flair
+  * You may call the parameter whatever you like, but its default value should
+    be `"*"`
+  * Call example: `let encouragingPromptFunction = wrapAdjective("!!!")`
+* Thus a total call should be:
+      `wrapAdjective("%")("a dedicated programmer") //=> "You are %a dedicated programmer%!"`
 
-To keep you fresh on building implementations to satsify tests, we're not going
-to describe the implementation of the final two test sections. Use the tests to
+### Additional Practice in Lab-Driven Development for JavaScript Basics
+
+To keep you fresh on building implementations to satisfy tests, we're not going
+to describe the implementation of the final two test sections. The remainder of
+the tests ***are not*** new material. They're here to make sure you remember
+how to work with `Object`s and `Array`s full of functions. Use the tests to
 guide you in feeling confident working with functions.
 
 ## Conclusion

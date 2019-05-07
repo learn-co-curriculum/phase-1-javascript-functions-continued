@@ -46,8 +46,12 @@ describe("index.js", () => {
   })
 
   describe("defines an object called Calculator", function() {
-    describe("that has a method called add", function() {
-      it("function exists", function() {
+    it("has a JavaScript Object called Calculator as a local variable", function() {
+      expect(Calculator).to.be.a('object')
+    })
+
+    describe("that has a function called add", function() {
+      it("Calculator.add exists", function() {
         expect(Calculator.add).to.exist
       })
 
@@ -56,9 +60,9 @@ describe("index.js", () => {
       })
     })
 
-    describe("that has a method called subtract", function() {
-      it("function exists", function() {
-        expect(Calculator.add).to.exist
+    describe("that has a function called subtract", function() {
+      it("Calculator.add exists", function() {
+        expect(Calculator.subtract).to.exist
       })
 
       it("calculates 1 - 3", function() {
@@ -66,8 +70,8 @@ describe("index.js", () => {
       })
     })
 
-    describe("that has a method called multiply", function() {
-      it("function exists", function() {
+    describe("that has a function called multiply", function() {
+      it("Calculator.multiply exists", function() {
         expect(Calculator.multiply).to.exist
       })
 
@@ -76,8 +80,8 @@ describe("index.js", () => {
       })
     })
 
-    describe("that has a method called divide", function() {
-      it("function exists", function() {
+    describe("that has a function called divide", function() {
+      it("Calculator.divide exists", function() {
         expect(Calculator.divide).to.exist
       })
 
@@ -87,7 +91,7 @@ describe("index.js", () => {
     })
   })
 
-  describe("Defines a method called actionApplyer", function() {
+  describe("Defines a function called actionApplyer", function() {
     it("exists", function() {
         expect(actionApplyer).to.exist
     })
