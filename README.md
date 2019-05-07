@@ -397,4 +397,16 @@ this module.
 
 ## Resources
 
-* https://developer.mozilla.org/en-US/docs/web/JavaScript/Reference/Operators/function
+- [Wikipedia — First-class function][wiki]
+- [StackOverflow — What is meant by 'first class object'?][stackoverflow]
+- [Helephant — Functions are first class objects in javascript (Wayback Machine)][helephant]
+- [2ality — Expressions versus statements in JavaScript][2ality]
+- [MDN - Functions][mdn-fn]
+- [MDN — Statements and declarations][mdn]
+
+[wiki]: https://en.wikipedia.org/wiki/First-class_function
+[stackoverflow]: https://stackoverflow.com/questions/705173/what-is-meant-by-first-class-object
+[helephant]: https://web.archive.org/web/20170606141950/http://helephant.com/2008/08/19/functions-are-first-class-objects-in-javascript/
+[2ality]: http://2ality.com/2012/09/expressions-vs-statements.html
+[mdn]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements
+[mdn-fn]: https://developer.mozilla.org/en-US/docs/web/JavaScript/Reference/Operators/function
