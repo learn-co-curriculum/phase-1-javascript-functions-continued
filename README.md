@@ -16,6 +16,10 @@ This lab provides a summation of the basics of JavaScript functions. Most of
 these ideas should feel familiar.  Be sure to take time to experiment or read
 up on a concept if you're not comfortable with the idea.
 
+We also recommend that you take on the lab as you read through the sections.
+Reinforcing what you read with what you know how to type will make sure the
+concepts are locked in.
+
 ## Define a Function Using Function Declaration
 
 In JavaScript, the most common way to define functions is with a **function
@@ -59,6 +63,11 @@ function razzle(lawyer="Billy", target="'em") {
 razzle() //=> Billy razzle-dazzles 'em!
 razzle("Methuselah", "T'challah") //=> Methuselah razzle-dazzles T'challah!
 ```
+
+**LAB**: Implement a function called `saturdayFun`. It should return a `String` like
+`"This Saturday, I want to ....!"` Fill in the `...` with the activity that's
+passed in as the first parameter. If nothing is passed in, default to
+`"roller-skate"`.
 
 ## Define the Term Hoisting
 
@@ -131,6 +140,11 @@ expressions are not hoisted.*** Since we assign these expressions to variables,
 we'd expect things to operate in the same way they do when we assign a `String`
 to a variable or the result of an arithmetic expression to a variable. Those
 assignments are not hoisted, thus neither is a function expression.
+
+**LAB**: Implement a function called `mondayWork`. It should return a `String` like
+`"This Monday, I will ... ."` Fill in the `...` with the activity that's
+passed in as the first parameter. If nothing is passed in, default to
+`"go to the office"`.
 
 ## Define the Term "Anonymous Function"
 
@@ -349,6 +363,30 @@ answer() //=> 5
 console.log(`The base was ${theBase()}`)
 // OUTPUT: The base was 3
 ```
+
+**LAB**:
+
+* Implement a function called `wrapAdjective`.
+  * It should return a function
+    * This "inner" function should:
+      * take a single parameter that should default to `"special"`. Name it
+        however you wish.
+      * return a `String` of the form "You are ..." where `...` should be the
+        adjective this function received wrapped in visual flair
+  * It should take as parameter a `String` that will be used to create visual flair
+  * You may call the parameter whatever you like, but its default value should
+    be `"*"`
+  * Call example: `let encouragingPromptFunction = wrapAdjective("!!!")`
+* Thus a total call should be:
+      `wrapAdjective("%")("a dedicated programmer") //=> "You are %a dedicated programmer%!"`
+
+### Additional Practice in Lab-Driven Development for JavaScript Basics
+
+To keep you fresh on building implementations to satisfy tests, we're not going
+to describe the implementation of the final two test sections. The remainder of
+the tests ***are not*** new material. They're here to make sure you remember
+how to work with `Object`s and `Array`s full of functions. Use the tests to
+guide you in feeling confident working with functions.
 
 ## Conclusion
 
