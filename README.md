@@ -64,7 +64,7 @@ razzle() //=> Billy razzle-dazzles 'em!
 razzle("Methuselah", "T'challah") //=> Methuselah razzle-dazzles T'challah!
 ```
 
-**LAB**: Implement a method called `saturdayFun`. It should return a `String` like
+**LAB**: Implement a function called `saturdayFun`. It should return a `String` like
 `"This Saturday, I want to ....!"` Fill in the `...` with the activity that's
 passed in as the first parameter. If nothing is passed in, default to
 `"roller-skate"`.
@@ -141,7 +141,7 @@ we'd expect things to operate in the same way they do when we assign a `String`
 to a variable or the result of an arithmetic expression to a variable. Those
 assignments are not hoisted, thus neither is a function expression.
 
-**LAB**: Implement a method called `mondayWork`. It should return a `String` like
+**LAB**: Implement a function called `mondayWork`. It should return a `String` like
 `"This Monday, I will ... ."` Fill in the `...` with the activity that's
 passed in as the first parameter. If nothing is passed in, default to
 `"go to the office"`.
@@ -364,7 +364,7 @@ console.log(`The base was ${theBase()}`)
 // OUTPUT: The base was 3
 ```
 
-**LAB**: Implement a method called `wrapAdjective`. It should take as parameter
+**LAB**: Implement a function called `wrapAdjective`. It should take as parameter
 a `String` that will be used to create visual pizzazz. It should default to
 `"*"`. The `wrapAdjective` should return a function.  The returned function (or
 "inner function") should take a single parameter that should default to
