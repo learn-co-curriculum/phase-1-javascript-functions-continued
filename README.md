@@ -281,4 +281,4 @@ this module.
 
 ## Resources
 
-
+* https://developer.mozilla.org/en-US/docs/web/JavaScript/Reference/Operators/function
