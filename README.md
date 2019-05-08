@@ -8,17 +8,21 @@
 - Define the term "anonymous function"
 - Define an IIFE: Instantly-Invoked Function Expression
 - Define the term "function-level scope"
+- Define the term "scope chain"
 - Define the term "closure"
 
 ## Introduction
 
 This lab provides a summation of the basics of JavaScript functions. Most of
 these ideas should feel familiar.  Be sure to take time to experiment or read
-up on a concept if you're not comfortable with the idea.
+up on a concept if you're not comfortable with the idea before moving on.  If
+you're struggling here, the remainder of this module will be challenging. Fix
+any gaps now before moving on.
 
-We also recommend that you take on the lab as you read through the sections.
+We also recommend that you resolve the lab as you read through the sections.
 Reinforcing what you read with what you know how to type will make sure the
-concepts are locked in.
+concepts are locked in. We'll prompt you when it's a good time to shift modes
+from "reading along" to coding.
 
 ## Define a Function Using Function Declaration
 
@@ -32,8 +36,8 @@ function razzle() {
 ```
 
 The word `razzle` becomes a _pointer_ to some stored, potential,
-not-yet-actually run a bit of work (the function). We use the _pointer_ to call
-the function. We call the function by adding `()` after the _pointer_.
+not-yet-actually-run bit of work (the function). We use the _pointer_ to _call_
+or _invoke_ the function. We _call_ the function by adding `()` after the _pointer_.
 
 ```
 function razzle() {
@@ -67,13 +71,14 @@ razzle("Methuselah", "T'challah") //=> Methuselah razzle-dazzles T'challah!
 **LAB**: Implement a function called `saturdayFun`. It should return a `String` like
 `"This Saturday, I want to ....!"` Fill in the `...` with the activity that's
 passed in as the first parameter. If nothing is passed in, default to
-`"roller-skate"`.
+`"roller-skate"`. Use the `learn` program to verify you've gotten a working
+implementation. Come back here once you've gotten just this set of tests passing.
 
 ## Define the Term Hoisting
 
 JavaScript's ability to call functions _before_ they appear in the code is
-called hoisting. For hoisting to work, the function must be defined as a
-function declaration.
+called _hoisting_. For hoisting to work, **the function must be defined as a
+function declaration**.
 
 ## Define a Function Using a Function Expression
 
@@ -103,8 +108,9 @@ let fn = function() {
 }
 ```
 
-This **function expression** evaluates to "stored work." If we ask JavaScript
-what it is it says:
+This **function expression** evaluates to "stored work." Instead of the value `2`
+when `1 + 1` is evaluated, in `fn` JavaScript stores _work_ &mdash; something that's
+much harder to visualize than `2`! If we ask JavaScript what's in `fn`, it says:
 
 ```js
 let fn = function() {
@@ -114,13 +120,15 @@ fn //=> ƒ () { console.log("Yet more razzling") }
 ```
 
 Here, Chrome tells us that `fn` points to an un-executed function, a "frozen"
-function, a "potential" function, a "recipe" for work. In this example, `fn` is
-a _pointer_ to the stored block of work inside of the function (just as we saw
-with **function declarations**). But the work is merely potential, it hasn't
-been _done_yet. Just as with **function declaration**, we need to invoke or
-_call_ the function.
+function, a "potential" function, a "recipe" for work. The Chrome console symbolizes
+this "frozen work" by putting the function definition after this cool special `ƒ`
+character.
 
-To **do** the work, to turn the potential real, to "un-freeze" the function, we
+Here, `fn` is a _pointer_ to the stored block of work. But the work is merely
+_potential_, it hasn't been _done_ yet. Just as with **function declaration**,
+we need to _invoke_ or _call_ the function.
+
+To **do** the work, to make the potential real, to "un-freeze" the function, we
 add `()` to the end, optionally adding arguments.
 
 ```js
@@ -128,15 +136,12 @@ let fn = function() {
   console.log("Yet more razzling")
 } //=> undefined
 fn //=> ƒ () { console.log("Yet more razzling") }
-fn() //=> Yet more razzling
+fn() //=> "Yet more razzling"
 ```
-
-In the following lessons, we'll learn more complex ways of taking a "potential"
-function and activating it.
 
 In any case, a **function expression** comes about when we write
 `function(){...}` and assign it to a variable. Very importantly, ***function
-expressions are not hoisted.*** Since we assign these expressions to variables,
+expressions are not hoisted***. Since we assign these expressions to variables,
 we'd expect things to operate in the same way they do when we assign a `String`
 to a variable or the result of an arithmetic expression to a variable. Those
 assignments are not hoisted, thus neither is a function expression.
@@ -144,7 +149,8 @@ assignments are not hoisted, thus neither is a function expression.
 **LAB**: Implement a function called `mondayWork`. It should return a `String` like
 `"This Monday, I will ... ."` Fill in the `...` with the activity that's
 passed in as the first parameter. If nothing is passed in, default to
-`"go to the office"`.
+`"go to the office"`. Use the `learn` program to verify you've gotten a working
+implementation. Come back here once you've gotten just this set of tests passing.
 
 ## Define the Term "Anonymous Function"
 
@@ -185,7 +191,7 @@ the function immediately after defining it.
 ```
 
 This bit of code is called an IIFE or "Instantly Invoked Function Expression."
-This stands to reason since its a function expression that we run immediately.
+This stands to reason since it's a function expression that we run immediately.
 IIFEs are a good way to make sure that you're grasping the content of this
 lesson up to this point.
 
@@ -193,7 +199,8 @@ Interestingly, any variables, functions, `Array`s, etc. that are defined
 _inside_ of the function expression's body _can't_ be seen _outside_ of the
 IIFE.  It's like opening up a micro-dimension, a bubble-universe, doing all the
 work you could ever want to do there, and then closing the space-time rift.
-IIFEs are definitely science fiction or comic book stuff.
+IIFEs are definitely science fiction or comic book stuff recalling the plot
+of "Donnie Darko" or Dr. Strange's "mirror dimension."
 
 
 ```js
@@ -209,8 +216,8 @@ IIFEs are definitely science fiction or comic book stuff.
 We'll see some of the practical power of "hiding things" in IIFEs a little
 later in this lesson.
 
-> **(ADVANCED) SYNTAX QUESTION** Some keen-eyed readers might think, why add
-> parentheses around the function expression. Why not:
+> **(ADVANCED) SYNTAX QUESTION** Some keen-eyed readers might ask, "Why add
+> parentheses around the function expression?" Why not:
 >
 > ```js
 > function(x){ return x + 2 }(2) //=> ERROR
@@ -226,14 +233,18 @@ later in this lesson.
 > symbols and operators sitting right next to each other. Just as we find the way
 > ancient Romans wrote (all-caps, no spaces) VERYHARDTOREADANDHARDTOKEEPTRACKOF,
 > JavaScript needs those "extra" parentheses to tell what's part of the function
-> expression and what's part of the invocation.
+> expression and what's part of the invocation. It _shouldn't_ be necessary, but is.
 
 ## Define the Term "Function-level Scope"
 
 JavaScript exhibits "Function-level" scope. This means that if a function is
 defined _inside another_ function, the inner function has access to all the
 parameters (variables passed in) as well as any variables defined in the
-function. Also: this is where people really start to get awed by JavaScript.
+function. This moves backward recursively too. Each of the enclosing parents'
+scopes are made available via the _scope chain_. Let's see things working before
+we define _scope chain_.
+
+> **ASIDE**: This is where people **really** start to get awed by JavaScript.
 
 Consider this code:
 
@@ -284,7 +295,6 @@ to the `outer`'s scope!
 
 Let's tighten this code up once more instead of assigning the function
 expression to `innerFunction`, let's just return the function expression.
-
 
 ```js
 function outer(greeting, msg="It's a fine day to learn") {
@@ -364,6 +374,31 @@ console.log(`The base was ${theBase()}`)
 // OUTPUT: The base was 3
 ```
 
+## Define the Term "Scope Chain"
+
+The mechanism behind all the cool stuff we just saw is the _scope chain_ which 
+allows functions defined in functions (even defined in other functions ad
+infinitum) to access all their parent scopes' variables is called the
+_scope chain_. Here's a simple example:
+
+```js
+function demoChain(name) {
+  let part1 = 'hi'
+  return function() {
+    let part2 = 'there'
+    return function() { // Innermost
+      console.log(`${part1.toUpperCase()} ${part2} ${name}`);
+    }
+  }
+}
+
+demoChain("Dr. Stephen Strange")()()
+```
+
+Through the _scope chain_ the function labeled `//Innermost` has access to
+`name`, `part`, and `part2` when it is called and runs the `console.log()`
+statement. That's awesome wormhole, space-time, magic!
+
 **LAB**:
 
 * Implement a function called `wrapAdjective`.
@@ -379,14 +414,18 @@ console.log(`The base was ${theBase()}`)
   * Call example: `let encouragingPromptFunction = wrapAdjective("!!!")`
 * Thus a total call should be:
       `wrapAdjective("%")("a dedicated programmer") //=> "You are %a dedicated programmer%!"`
+      
+Use the `learn` program to verify you've gotten a working
+implementation. Come back here once you've gotten just this set of tests passing.
 
 ### Additional Practice in Lab-Driven Development for JavaScript Basics
 
-To keep you fresh on building implementations to satisfy tests, we're not going
-to describe the implementation of the final two test sections. The remainder of
-the tests ***are not*** new material. They're here to make sure you remember
-how to work with `Object`s and `Array`s full of functions. Use the tests to
-guide you in feeling confident working with functions.
+Whew! That's a lot of recap with a lot of mind-bending stuff. Let's make sure
+that we review some of our easier basics.
+
+The remainder of the tests ***are not*** new material. They're here to make
+sure you remember how to work with `Object`s and `Array`s full of functions.
+Use the tests to guide you in feeling confident working with functions.
 
 ## Conclusion
 
