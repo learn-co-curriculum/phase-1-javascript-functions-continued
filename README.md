@@ -420,12 +420,12 @@ implementation. Come back here once you've gotten just this set of tests passing
 
 ### Additional Practice in Lab-Driven Development for JavaScript Basics
 
-Whew that's a lot of recap with a lot of mind-bending stuff. Let's make sure that
-we review some of our easier basics.
+Whew! That's a lot of recap with a lot of mind-bending stuff. Let's make sure
+that we review some of our easier basics.
 
-The remainder of the tests ***are not*** new material. They're here to make sure you remember
-how to work with `Object`s and `Array`s full of functions. Use the tests to
-guide you in feeling confident working with functions.
+The remainder of the tests ***are not*** new material. They're here to make
+sure you remember how to work with `Object`s and `Array`s full of functions.
+Use the tests to guide you in feeling confident working with functions.
 
 ## Conclusion
 
