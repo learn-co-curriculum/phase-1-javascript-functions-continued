@@ -39,7 +39,7 @@ The word `razzle` becomes a _pointer_ to some stored, potential,
 not-yet-actually-run bit of work (the function). We use the _pointer_ to _call_
 or _invoke_ the function. We _call_ the function by adding `()` after the _pointer_.
 
-```
+```js
 function razzle() {
   console.log("You've been razzled!");
 }
