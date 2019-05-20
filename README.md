@@ -166,7 +166,7 @@ function() {
 
 Unlike a ***function declaration***, there's no function name in front of the
 `()`. Since anonymous means, "without a name," this function is called,
-sensibly enough, an anonymous function***.
+sensibly enough, an anonymous function.
 
 ## Define an IIFE: Instantly-Invoked Function Expression
 
@@ -180,7 +180,7 @@ We recognize the first `()` as being those that we might use from arithmetic:
 
 ```js
 ( 3 - 4 ) * 2 // => -2
-``
+```
 
 So the first parentheses return the anonymous function, the potential to do
 work.  The second `()` are the `()` of function invocation. So we're "invoking"
@@ -274,7 +274,7 @@ outer("Hello") // 1
 
 This might look a little bit weird, but it generally makes sense to our
 intuition about scopes: inner things can see their parent outer things. But
-with a simple change, something miraculous can happen
+with a simple change, something miraculous can happen:
 
 ```js
 function outer(greeting, msg="It's a fine day to learn") { // 2
@@ -289,7 +289,7 @@ outer("Hello")("student", "JavaScript") // 1, 5
 ```
 
 Amazingly, this code works ***the exact same***. Even if the inner function
-`innerFunction` is invoked **outside** the parent function, it still has access
+`innerFunction` is invoked **outside** the parent function, it ***still*** has access
 to those parent function's variables. It's like a little wormhole in space-time
 to the `outer`'s scope!
 
@@ -376,10 +376,9 @@ console.log(`The base was ${theBase()}`)
 
 ## Define the Term "Scope Chain"
 
-The mechanism behind all the cool stuff we just saw is the _scope chain_ which 
-allows functions defined in functions (even defined in other functions ad
-infinitum) to access all their parent scopes' variables is called the
-_scope chain_. Here's a simple example:
+The mechanism behind all the cool stuff we just saw is the _scope chain_ which
+allows functions defined in functions to access all their parent scopes'
+variables.  Here's a simple example:
 
 ```js
 function demoChain(name) {
@@ -392,10 +391,10 @@ function demoChain(name) {
   }
 }
 
-demoChain("Dr. Stephen Strange")()()
+demoChain("Dr. Stephen Strange")()() //=> HI there Dr. Stephen Strange
 ```
 
-Through the _scope chain_ the function labeled `//Innermost` has access to
+Through the _scope chain_, the function labeled `//Innermost` has access to
 `name`, `part`, and `part2` when it is called and runs the `console.log()`
 statement. That's awesome wormhole, space-time, magic!
 
