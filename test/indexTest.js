@@ -61,7 +61,7 @@ describe("index.js", () => {
     })
 
     describe("that has a function called subtract", function() {
-      it("Calculator.add exists", function() {
+      it("Calculator.subtract exists", function() {
         expect(Calculator.subtract).to.exist
       })
 
