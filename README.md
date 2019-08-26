@@ -226,7 +226,7 @@ later in this lesson.
 > instead of:
 >
 > ```js
-> (function(x){ return x + 2 }()2) //=> 4
+> (function(x){ return x + 2 })(2) //=> 4
 > ```
 >
 > The reason is that JavaScript gets confused by all those bits of special
