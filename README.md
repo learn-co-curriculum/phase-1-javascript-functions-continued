@@ -173,27 +173,34 @@ sensibly enough, an anonymous function.
 As a thought experiment, what happens here:
 
 ```js
-(function(x){ return x + 3 })(2) //=> ???
+(function(baseNumber){ return baseNumber + 3 })(2) //=> ???
 ```
 
-We recognize the first `()` as being those that we might use from arithmetic:
+We recognize the first `()` as being those that we might use from arithmetic to
+make something happen first in terms of order-of-operations. In the example
+below, `*` should happen first, but instead it happens after the subtraction
+since the `()` evaluation is performed earlier:
 
 ```js
 ( 3 - 4 ) * 2 // => -2
 ```
 
-So the first parentheses return the anonymous function, the potential to do
-work.  The second `()` are the `()` of function invocation. So we're "invoking"
-the function immediately after defining it.
+So in the IIFE statement, the first parentheses return an anonymous function.
+It's like we assigned an anonymous function to a variable name, but didn't do
+the actual assignment and are instead left the right hand side of the
+assignment: a thing that can be invoked (instantly).
+
+The second `()` are the `()` of function invocation like `sayHello()` having
+`()` after the `g`. It means, do the work in the function identified by the
+name `sayHello`.
+
+Put these two components together and  we're "invoking" the function
+immediately after defining it. That would make the noun we're doing that upon
+an "Instantly-Invoked Function Expression (IIFE for short)."
 
 ```js
-(function(x){ return x + 3 })(2) //=> 5
+(function(baseNumber){ return baseNumber + 3 })(2) //=> 5
 ```
-
-This bit of code is called an IIFE or "Instantly Invoked Function Expression."
-This stands to reason since it's a function expression that we run immediately.
-IIFEs are a good way to make sure that you're grasping the content of this
-lesson up to this point.
 
 Interestingly, any variables, functions, `Array`s, etc. that are defined
 _inside_ of the function expression's body _can't_ be seen _outside_ of the
@@ -201,17 +208,6 @@ IIFE.  It's like opening up a micro-dimension, a bubble-universe, doing all the
 work you could ever want to do there, and then closing the space-time rift.
 IIFEs are definitely science fiction or comic book stuff recalling the plot
 of "Donnie Darko" or Dr. Strange's "mirror dimension."
-
-
-```js
-(
-  function(thingToAdd) {
-    let base = 3
-    return base + thingToAdd
-  }
-)(2) //=> 5
-// console.log(base) //=> Uncaught ReferenceError: base is not defined
-```
 
 We'll see some of the practical power of "hiding things" in IIFEs a little
 later in this lesson.
