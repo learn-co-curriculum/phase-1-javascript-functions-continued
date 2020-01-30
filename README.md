@@ -178,8 +178,8 @@ As a thought experiment, what happens here:
 
 We recognize the first `()` as being those that we might use from arithmetic to
 make something happen first in terms of order-of-operations. In the example
-below, `*` should happen first, but instead it happens after the subtraction
-since the `()` evaluation is performed earlier:
+below, although we would normally expect `*` to happen before `-`, instead it 
+happens after since the `()` evaluation is performed earlier:
 
 ```js
 ( 3 - 4 ) * 2 // => -2
@@ -191,12 +191,12 @@ the actual assignment and are instead left the right hand side of the
 assignment: a thing that can be invoked (instantly).
 
 The second `()` are the `()` of function invocation like `sayHello()` having
-`()` after the `g`. It means, do the work in the function identified by the
+`()` after the `o`. It means, do the work in the function identified by the
 name `sayHello`.
 
 Put these two components together and  we're "invoking" the function
-immediately after defining it. That would make the noun we're doing that upon
-an "Instantly-Invoked Function Expression (IIFE for short)."
+immediately after defining it. Thus the name Instantly-Invoked Function 
+Expression (IIFE for short).
 
 ```js
 (function(baseNumber){ return baseNumber + 3 })(2) //=> 5
@@ -235,9 +235,9 @@ later in this lesson.
 
 JavaScript exhibits "Function-level" scope. This means that if a function is
 defined _inside another_ function, the inner function has access to all the
-parameters (variables passed in) as well as any variables defined in the
-function. This moves backward recursively too. Each of the enclosing parents'
-scopes are made available via the _scope chain_. Let's see things working before
+parameters (variables passed in) of, as well as any variables defined in, the outer 
+function. This moves backward recursively too. Each of the enclosing parents' 
+scopes are made available via the _scope chain_. Let's see things working before 
 we define _scope chain_.
 
 > **ASIDE**: This is where people **really** start to get awed by JavaScript.
@@ -289,7 +289,7 @@ Amazingly, this code works ***the exact same***. Even if the inner function
 to those parent function's variables. It's like a little wormhole in space-time
 to the `outer`'s scope!
 
-Let's tighten this code up once more instead of assigning the function
+Let's tighten this code up once more: instead of assigning the function
 expression to `innerFunction`, let's just return the function expression.
 
 ```js
@@ -337,7 +337,6 @@ We could:
 
 ```js
 let storedFunction = outer("Hello")
-// ... lots of other code
 storedFunction("student", "JavaScript")
 //=> "Hello, student! It's a fine day to learn JavaScript"
 ```
@@ -391,7 +390,7 @@ demoChain("Dr. Stephen Strange")()() //=> HI there Dr. Stephen Strange
 ```
 
 Through the _scope chain_, the function labeled `//Innermost` has access to
-`name`, `part`, and `part2` when it is called and runs the `console.log()`
+`name`, `part1`, and `part2` when it is called and runs the `console.log()`
 statement. That's awesome wormhole, space-time, magic!
 
 **LAB**:
