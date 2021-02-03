@@ -147,12 +147,12 @@ function() {
 }
 ```
 
-Unlike with a function declaration, there's no function name in front of the
-`()`. Note, however, that if we don't assign a name to the function, we have no
-way to call it. We lose access to our function immediately after it's created.
-So how can we invoke an anonymous function? We've seen one way before: we can
-use it as a callback function. For example, you'll often see anonymous functions
-passed as an argument to an event listener:
+Unlike a function declaration, there's no function name in front of the `()`.
+Note, however, that if we don't assign a name to the function, we have no way to
+call it. We lose access to our function immediately after it's created. So how
+can we invoke an anonymous function? We've seen one way before: we can use it as
+a callback function. For example, you'll often see anonymous functions passed as
+an argument to an event listener:
 
 ```js
 const button = document.getElementById('button');
