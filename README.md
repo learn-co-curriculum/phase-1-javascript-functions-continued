@@ -1,4 +1,4 @@
-# JavaScript Advanced Functions: Basic Functions Review
+# Functions: Continued
 
 ## Learning Goals
 
@@ -381,10 +381,8 @@ Recall the IIFE discussion. Since what's inside an IIFE can't be seen, if we
 wanted to let just tiny bits of information leak back out, we might want to
 pass that information back out, through a closure.
 
-_Note: We're also using destructuring assignment, don't forget your ES6 tools!_
-
 ```js
-const [answer, theBase] = (
+const array = (
   function(thingToAdd) {
     const base = 3;
     return [
@@ -398,31 +396,31 @@ const [answer, theBase] = (
 Note that the value on the right of the `=` in the first line is a function
 expression. That function takes a single argument and returns an array that
 contains two functions. The `(2)` after the function expression executes that
-function (instantly), and the two inner functions are stored in the variables
-`answer` and `theBase` by the destructuring assignment.
+function (instantly), and the two inner functions are stored in the `array`
+variable.
 
 Go ahead and copy the code above into your browser console and take a look at the
-values of `answer` and `theBase`. You should see the following:
+values of the two elements of `array`. You should see the following:
 
  ```js
-answer; // => ƒ () { return base + thingToAdd; }
-theBase; // => ƒ () { return base; }
+array[0]; //=> ƒ () { return base + thingToAdd; }
+array[1]; //=> ƒ () { return base; }
  ```
 
 However, if you try looking at the value of `base` in the console you'll get a
 reference error: the value of `base` is not accessible outside the function it's
-defined in. Now go ahead and _call_ `answer` and `theBase`; you should see the
-following:
+defined in. Now go ahead and _call_ the two returned functions; you should see
+the following:
 
 ```js
-answer(); // => 5
-theBase(); // => 3
+array[0](); //=> 5
+array[1](); //=> 3
 ```
 
-The `answer` and `theBase` functions are **closures**; they have access to the
-`base` variable because it's defined in their parent function. When they're
-executed, they "let out" the values of the sum and the original base number,
-allowing us to see them.
+The two functions being returned in `array` are **closures**; they have access
+to the `base` variable because it's defined in their parent function. When
+they're executed, they "let out" the values of the sum and the original base
+number, allowing us to see them.
 
 ## Define `Scope Chain`
 
