@@ -198,7 +198,7 @@ fn(); // "Yet more razzling"
 ```
 
 Also as with a function declaration, if we need to pass arguments to the
-function, we would include those in the parentheses.
+function, we would include those in the parentheses when we call the function.
 
 We now know how to define a function as a function expression. Very importantly,
 ***function expressions are not hoisted***. The same is true for any variable
@@ -239,10 +239,10 @@ browser console:
 
 Interestingly, any variables, functions, `Array`s, etc. that are defined
 _inside_ of the function expression's body _can't_ be seen _outside_ of the
-IIFE.  It's like opening up a micro-dimension, a bubble-universe, doing all the
-work you could ever want to do there, and then closing the space-time rift.
-We'll see some of the practical power of "hiding things" in IIFEs a little
-later in this lesson.
+IIFE. To see this, check the value of `baseNumber` in the console. It's like
+opening up a micro-dimension, a bubble-universe, doing all the work you could
+ever want to do there, and then closing the space-time rift. We'll see some of
+the practical power of "hiding things" in IIFEs a little later in this lesson.
 
 ## Define `Function-Level Scope`
 
@@ -278,8 +278,8 @@ Let's break this down:
    other parameter, `msg`, is set to a default value.
 3. Here's our old friend the function expression. It expects two arguments, to
    be stored in the parameters `name` and `lang`, and `lang` is assigned the
-   default value of `"Python"`. The function expression is saved in the local
-   variable `innerFunction`.
+   default value of `"Python"`. The function expression itself is saved in the
+   local variable `innerFunction`.
 4. Inside `innerFunction` we make use of its parameters, `name` and `lang`,
    ***as well as*** the `greeting` and `msg` parameters defined in
    innerFunction's containing (parent) function, `outer`. `innerFunction` has
@@ -292,7 +292,7 @@ intuition about scopes: inner things can see their parent outer things.
 
 Note that currently, the values of the arguments being passed to `innerFunction`
 are part of the **definition** of `outer`. In order to change those values we
-have to modify the `outer` function itself. This is not ideal.
+have to modify the `outer` function. This is not ideal.
 
 With a simple change, something miraculous can happen. Rather than having `outer`
 return the result of calling `innerFunction`, let's have it return the function
@@ -308,16 +308,9 @@ function outer(greeting, msg="It's a fine day to learn") {
 ```
 
 The return value of `outer` is now an **anonymous function**. To invoke it, we
-update the function call as shown below:
+update the function call as follows:
 
 ```js
-function outer(greeting, msg="It's a fine day to learn") {
-  const innerFunction =  function(name, lang="Python") {
-    return `${greeting}, ${name}! ${msg} ${lang}`;
-  }
-  return innerFunction;
-}
-
 outer("Hello")("student", "JavaScript");
 //=> "Hello, student! It's a fine day to learn JavaScript"
 ```
