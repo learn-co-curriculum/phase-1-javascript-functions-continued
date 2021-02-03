@@ -3,26 +3,26 @@
 ## Learning Goals
 
 - Define a function using a function declaration
-- Define the term hoisting
+- Define `hoisting`
+- Define `function expression`
+- Define `anonymous function`
 - Define a function using a function expression
-- Define the term "anonymous function"
-- Define an IIFE: Instantly-Invoked Function Expression
-- Define the term "function-level scope"
-- Define the term "scope chain"
-- Define the term "closure"
+- Define an IIFE: `Instantly-Invoked Function Expression`
+- Define `function-level scope`
+- Define `scope chain`
+- Define `closure`
 
 ## Introduction
 
-This lab provides a summation of the basics of JavaScript functions. Most of
-these ideas should feel familiar.  Be sure to take time to experiment or read
-up on a concept if you're not comfortable with the idea before moving on.  If
-you're struggling here, the remainder of this module will be challenging. Fix
-any gaps now before moving on.
+This lab describes some more advanced concepts related to JavaScript functions.
+Be sure to take time to experiment or read up on a concept if you're not
+comfortable with the idea before moving on. If you're struggling here, the
+remainder of this module will be challenging. Fix any gaps now before moving on.
 
-We also recommend that you resolve the lab as you read through the sections.
-Reinforcing what you read with what you know how to type will make sure the
-concepts are locked in. We'll prompt you when it's a good time to shift modes
-from "reading along" to coding.
+We also recommend that you complete the lab as you read through the sections.
+Reinforcing what you read by physically typing in the code will help make sure
+the concepts are locked in. We'll prompt you when it's a good time to shift
+modes from "reading along" to coding.
 
 ## Define a Function Using Function Declaration
 
@@ -37,21 +37,21 @@ function razzle() {
 
 The word `razzle` becomes a _pointer_ to some stored, potential,
 not-yet-actually-run bit of work (the function). We use the _pointer_ to _call_
-or _invoke_ the function. We _call_ the function by adding `()` after the _pointer_.
+or _invoke_ the function. We _call_ the function by adding `()` after the
+_pointer_.
 
 ```js
 function razzle() {
   console.log("You've been razzled!");
 }
-razzle()
+razzle();
 //=> "You've been razzled!"
 ```
 
 Interestingly, you can write function declarations _after_ you call them:
 
-
 ```js
-razzle() //=> "You've been razzled!"
+razzle(); //=> "You've been razzled!"
 function razzle() {
   console.log("You've been razzled!");
 }
@@ -64,181 +64,196 @@ brief code synopsis:
 function razzle(lawyer="Billy", target="'em") {
   console.log(`${lawyer} razzle-dazzles ${target}!`);
 }
-razzle() //=> Billy razzle-dazzles 'em!
-razzle("Methuselah", "T'challah") //=> Methuselah razzle-dazzles T'challah!
+razzle(); //=> Billy razzle-dazzles 'em!
+razzle("Methuselah", "T'challah"); //=> Methuselah razzle-dazzles T'challah!
 ```
 
-**LAB**: Implement a function called `saturdayFun`. It should return a `String` like
-`"This Saturday, I want to ....!"` Fill in the `...` with the activity that's
-passed in as the first parameter. If nothing is passed in, default to
-`"roller-skate"`. Use the `learn` program to verify you've gotten a working
-implementation. Come back here once you've gotten just this set of tests passing.
+**LAB**: Implement a function called `saturdayFun`. It should return a `String`
+like `"This Saturday, I want to ....!"` Fill in the `...` with the activity
+that's passed in as the first parameter. If nothing is passed in, default to
+`"roller-skate"`. Run `learn` to verify you've gotten the first set of tests
+passing before continuing with the lesson.
 
-## Define the Term Hoisting
+## Define `Hoisting`
 
 JavaScript's ability to call functions _before_ they appear in the code is
-called _hoisting_. For hoisting to work, **the function must be defined as a
+called _hoisting_. For hoisting to work, **the function must be defined using a
 function declaration**.
+
+## Define `Function Expression`
+
+We've learned that programming languages feature _expressions_: arrangements of
+constants, variables, and symbols that, when interpreted by the language,
+produce a _value_. To review, open up your browser console and type in these
+examples:
+
+```js
+1 + 1; //=> 2
+"Razzle " + "dazzle!"; //=> "Razzle dazzle!"
+```
+
+The examples above are expressions that return _primitive values_, but
+JavaScript also has _function expressions_ that look like this:
+
+```js
+function() {
+  console.log("Yet more razzling");
+}
+```
+
+The _value_ returned by this expression is the function itself. Go ahead and
+enter the above into the browser console; you should see the following:
+
+```js
+Uncaught SyntaxError: Function statements require a function name
+```
+
+The problem is that, when the function expression appears by itself as shown
+above, **JavaScript does not recognize it as a function expression**; it instead
+interprets it as a function declaration that's missing its name. One way to tell
+the JavaScript engine that it's a function expression is to use the `grouping
+operator ()` to wrap the entire thing:
+
+```js
+(function() {
+  console.log("Yet more razzling");
+})
+```
+
+Recall that the grouping operator is usually used in arithmetic operations to
+tell the JavaScript engine to evaluate the value that's inside it first. It's
+serving a similar purpose in this case: it's telling JavaScript to interpret
+what's inside the parentheses as a _value_. With the grouping operator in place,
+the JavaScript engine recognizes our function as a function expression. Enter
+the function into your console again, this time using the grouping operator. You
+should see the following:
+
+```js
+ƒ () {
+  console.log("Yet more razzling");
+}
+```
+
+JavaScript now correctly shows us the return value of our function expression: a
+_function_ (indicated by the `ƒ ()`) storing the work of logging our message.
+
+## Define `Anonymous Function`
+
+An **anonymous function** is, quite simply, a function that doesn't have a name:
+
+```js
+function() {
+  console.log("Yet more razzling");
+}
+```
+
+Unlike with a function declaration, there's no function name in front of the
+`()`. Note, however, that if we don't assign a name to the function, we have no
+way to call it. We lose access to our function immediately after it's created.
+So how can we invoke an anonymous function? We've seen one way before: we can
+use it as a callback function. For example, you'll often see anonymous functions
+passed as an argument to an event listener:
+
+```js
+const button = document.getElementById('button');
+button.addEventListener('click', function() {
+  console.log("Yet more razzling");
+});
+```
+
+Our anonymous function is being passed as an argument to `addEventListener`. The
+JavaScript engine "stores it away" as work to be executed later, when the button
+is clicked.
 
 ## Define a Function Using a Function Expression
 
-Early in your programming career, you probably learned that programming
-languages feature _expressions_: arrangements of constants, variables, and
-symbols that, when interpreted by the language, produce a _value_.
+Another way we can solve the problem of accessing an anonymous function is by
+declaring a variable and assigning the function as its value. Recall that any
+expression can be assigned to a variable; this includes function expressions:
 
 ```js
-1 + 1 //=> 2
-"Razzle " + "dazzle!" //=> "Razzle dazzle!"
-```
-
-By analogy, if we agree that JavaScript has function _expressions_ that look
-like this:
-
-```js
-function() {
-  console.log("Yet more razzling")
+const fn = function() {
+  console.log("Yet more razzling");
 }
 ```
 
-what is in the variable `fn` at the end of this block of code?
+The code above defines our function using a function expression. If we ask
+JavaScript what's in `fn`, it tells us:
 
 ```js
-let fn = function() {
-  console.log("Yet more razzling")
-}
+fn; //=> ƒ () { console.log("Yet more razzling") }
 ```
 
-This **function expression** evaluates to "stored work." Instead of the value `2`
-when `1 + 1` is evaluated, in `fn` JavaScript stores _work_ &mdash; something that's
-much harder to visualize than `2`! If we ask JavaScript what's in `fn`, it says:
+Here, `fn` is a _pointer_ to the stored block of work that hasn't yet been
+invoked. Just as with **function declaration**, to actually do the work, we need
+to _invoke_ or _call_ the function. We do this by adding `()` to the end of our
+"pointer", the variable name:
 
 ```js
-let fn = function() {
-  console.log("Yet more razzling")
+const fn = function() {
+  console.log("Yet more razzling");
 } //=> undefined
-fn //=> ƒ () { console.log("Yet more razzling") }
+fn; //=> ƒ () { console.log("Yet more razzling") }
+fn(); // "Yet more razzling"
 ```
 
-Here, Chrome tells us that `fn` points to an un-executed function, a "frozen"
-function, a "potential" function, a "recipe" for work. The Chrome console symbolizes
-this "frozen work" by putting the function definition after this cool special `ƒ`
-character.
+Also as with a function declaration, if we need to pass arguments to the
+function, we would include those in the parentheses when we call the function.
 
-Here, `fn` is a _pointer_ to the stored block of work. But the work is merely
-_potential_, it hasn't been _done_ yet. Just as with **function declaration**,
-we need to _invoke_ or _call_ the function.
+We now know how to define a function as a function expression. Very importantly,
+***function expressions are not hoisted***. The same is true for any variable
+assignment: if we assign a `String` or the result of an arithmetic expression to
+a variable, those assignments are not hoisted either.
 
-To **do** the work, to make the potential real, to "un-freeze" the function, we
-add `()` to the end, optionally adding arguments.
-
-```js
-let fn = function() {
-  console.log("Yet more razzling")
-} //=> undefined
-fn //=> ƒ () { console.log("Yet more razzling") }
-fn() //=> "Yet more razzling"
-```
-
-In any case, a **function expression** comes about when we write
-`function(){...}` and assign it to a variable. Very importantly, ***function
-expressions are not hoisted***. Since we assign these expressions to variables,
-we'd expect things to operate in the same way they do when we assign a `String`
-to a variable or the result of an arithmetic expression to a variable. Those
-assignments are not hoisted, thus neither is a function expression.
-
-**LAB**: Implement a function called `mondayWork`. It should return a `String` like
-`"This Monday, I will ... ."` Fill in the `...` with the activity that's
-passed in as the first parameter. If nothing is passed in, default to
-`"go to the office"`. Use the `learn` program to verify you've gotten a working
-implementation. Come back here once you've gotten just this set of tests passing.
-
-## Define the Term "Anonymous Function"
-
-We also call the expression that produces a function that uses the template
-`function(){....}` an "***anonymous function***." In the previous example the
-following was the anonymous function:
-
-```js
-function() {
-  console.log("Yet more razzling")
-}
-```
-
-Unlike a ***function declaration***, there's no function name in front of the
-`()`. Since anonymous means, "without a name," this function is called,
-sensibly enough, an anonymous function.
+**LAB**: Implement a function expression called `mondayWork`. The function
+should return a `String` like `"This Monday, I will ... ."` Fill in the `...`
+with the activity that's passed in as the first parameter. If nothing is passed
+in, default to `"go to the office"`. Run `learn` to verify you've gotten this
+set of tests passing before continuing with the lesson.
 
 ## Define an IIFE: Instantly-Invoked Function Expression
 
-As a thought experiment, what happens here:
+Another way to invoke an anonymous function is by creating what's known as an
+`instantly-invoked function expression (IIFE)`.
+
+As a thought experiment, consider what happens here:
 
 ```js
-(function(baseNumber){ return baseNumber + 3 })(2) //=> ???
+(function(baseNumber){ return baseNumber + 3 })(2); //=> ???
 ```
 
-We recognize the first `()` as being those that we might use from arithmetic to
-make something happen first in terms of order-of-operations. In the example
-below, although we would normally expect `*` to happen before `-`, instead it 
-happens after since the `()` evaluation is performed earlier:
+We recognize the first `()` as the grouping operator that tells the JavaScript
+engine to interpret the contents as a value — in this case, a function
+expression. What this means is that, in the IIFE statement, the value returned
+by the first set of parentheses is an anonymous function, which can be invoked
+(instantly).
+
+The second `()` are the `()` of function invocation. When we put them
+immediately after the first set of parentheses, we're invoking the function that
+those parentheses return immediately after defining it. Try it out in the
+browser console:
 
 ```js
-( 3 - 4 ) * 2 // => -2
-```
-
-So in the IIFE statement, the first parentheses return an anonymous function.
-It's like we assigned an anonymous function to a variable name, but didn't do
-the actual assignment and are instead left the right hand side of the
-assignment: a thing that can be invoked (instantly).
-
-The second `()` are the `()` of function invocation like `sayHello()` having
-`()` after the `o`. It means, do the work in the function identified by the
-name `sayHello`.
-
-Put these two components together and  we're "invoking" the function
-immediately after defining it. Thus the name Instantly-Invoked Function 
-Expression (IIFE for short).
-
-```js
-(function(baseNumber){ return baseNumber + 3 })(2) //=> 5
+(function(baseNumber){ return baseNumber + 3; })(2); //=> 5
 ```
 
 Interestingly, any variables, functions, `Array`s, etc. that are defined
 _inside_ of the function expression's body _can't_ be seen _outside_ of the
-IIFE.  It's like opening up a micro-dimension, a bubble-universe, doing all the
-work you could ever want to do there, and then closing the space-time rift.
-IIFEs are definitely science fiction or comic book stuff recalling the plot
-of "Donnie Darko" or Dr. Strange's "mirror dimension."
+IIFE. To see this, check the value of `baseNumber` in the console. It's like
+opening up a micro-dimension, a bubble-universe, doing all the work you could
+ever want to do there, and then closing the space-time rift. We'll see some of
+the practical power of "hiding things" in IIFEs a little later in this lesson.
 
-We'll see some of the practical power of "hiding things" in IIFEs a little
-later in this lesson.
+## Define `Function-Level Scope`
 
-> **(ADVANCED) SYNTAX QUESTION** Some keen-eyed readers might ask, "Why add
-> parentheses around the function expression?" Why not:
->
-> ```js
-> function(x){ return x + 2 }(2) //=> ERROR
-> ```
->
-> instead of:
->
-> ```js
-> (function(x){ return x + 2 })(2) //=> 4
-> ```
->
-> The reason is that JavaScript gets confused by all those bits of special
-> symbols and operators sitting right next to each other. Just as we find the way
-> ancient Romans wrote (all-caps, no spaces) VERYHARDTOREADANDHARDTOKEEPTRACKOF,
-> JavaScript needs those "extra" parentheses to tell what's part of the function
-> expression and what's part of the invocation. It _shouldn't_ be necessary, but is.
-
-## Define the Term "Function-level Scope"
-
-JavaScript exhibits "Function-level" scope. This means that if a function is
+JavaScript exhibits "function-level" scope. This means that if a function is
 defined _inside another_ function, the inner function has access to all the
-parameters (variables passed in) of, as well as any variables defined in, the outer 
-function. This moves backward recursively too. Each of the enclosing parents' 
-scopes are made available via the _scope chain_. Let's see things working before 
-we define _scope chain_.
+parameters of, as well as any variables defined in, the outer function. This
+works recursively: if we nest a third function inside the inner function, it
+will have access to all the variables of both the inner and outer enclosing
+functions. Each of the enclosing parents' scopes are made available via the
+_scope chain_. We will define the scope chain a bit later in this lesson. Let's
+start by seeing it in action.
 
 > **ASIDE**: This is where people **really** start to get awed by JavaScript.
 
@@ -246,56 +261,88 @@ Consider this code:
 
 ```js
 function outer(greeting, msg="It's a fine day to learn") { // 2
-  let innerFunction =  function(name, lang="Python") { // 3
-    return `${greeting}, ${name}! ${msg} ${lang}` // 4
+  const innerFunction =  function(name, lang="Python") { // 3
+    return `${greeting}, ${name}! ${msg} ${lang}`; // 4
   }
-  return innerFunction("student", "JavaScript") // 5
+  return innerFunction("student", "JavaScript"); // 5
 }
 
-outer("Hello") // 1
+outer("Hello"); // 1
 //=> "Hello, student! It's a fine day to learn JavaScript"
 ```
 
-1. We call `outer`, passing `"Hello"` as an argument
+Let's break this down:
+
+1. We call `outer`, passing `"Hello"` as an argument.
 2. The argument (`"Hello"`) is saved in `outer`'s `greeting` parameter. The
-   other parameter, `msg` is set to a default value
-3. Here's our old friend the function expression. It expects two arguments
-   which it stores in the parameters `name` and `lang` with `lang` being set as
-   a default to `"Python"`. This expression is saved in the local variable
-   `innerFunction`
-4. Inside `innerFunction` we make use of both the parameters `name` and `lang`
-   ***as well as*** the parameters of innerFunction's containing (parent)
-   function. `innerFunction` gets access to those variables
-5. Inside `outer`, we invoke `innerFunction`
+   other parameter, `msg`, is set to a default value.
+3. Here's our old friend the function expression. It expects two arguments, to
+   be stored in the parameters `name` and `lang`, and `lang` is assigned the
+   default value of `"Python"`. The function expression itself is saved in the
+   local variable `innerFunction`.
+4. Inside `innerFunction` we make use of its parameters, `name` and `lang`,
+   ***as well as*** the `greeting` and `msg` parameters defined in
+   innerFunction's containing (parent) function, `outer`. `innerFunction` has
+   access to those variables via the scope chain.
+5. Finally, inside `outer`, we invoke `innerFunction`, passing arguments that
+   get stored in `innerFunction`'s `name` and `lang` parameters.
 
 This might look a little bit weird, but it generally makes sense to our
-intuition about scopes: inner things can see their parent outer things. But
-with a simple change, something miraculous can happen:
+intuition about scopes: inner things can see their parent outer things. 
+
+Note that currently, the values of the arguments being passed to `innerFunction`
+are part of the **definition** of `outer`. In order to change those values we
+have to modify the `outer` function. This is not ideal.
+
+With a simple change, something miraculous can happen. Rather than having `outer`
+return the result of calling `innerFunction`, let's have it return the function
+itself:
 
 ```js
-function outer(greeting, msg="It's a fine day to learn") { // 2
-  let innerFunction =  function(name, lang="Python") { // 3
-    return `${greeting}, ${name}! ${msg} ${lang}` // 4
+function outer(greeting, msg="It's a fine day to learn") {
+  const innerFunction =  function(name, lang="Python") {
+    return `${greeting}, ${name}! ${msg} ${lang}`;
   }
-  return innerFunction
+  return innerFunction;
 }
+```
 
-outer("Hello")("student", "JavaScript") // 1, 5
+The return value of `outer` is now an **anonymous function**. To invoke it, we
+update the function call as follows:
+
+```js
+outer("Hello")("student", "JavaScript");
 //=> "Hello, student! It's a fine day to learn JavaScript"
 ```
 
-Amazingly, this code works ***the exact same***. Even if the inner function
-`innerFunction` is invoked **outside** the parent function, it ***still*** has access
-to those parent function's variables. It's like a little wormhole in space-time
-to the `outer`'s scope!
+The function call is processed by the JavaScript engine from left to right.
+First, `outer` is called with the argument "Hello." The return value of calling
+`outer("Hello")` is itself a function and, therefore, can itself be called. We
+do this by chaining on the second set of parentheses. This is basically the same
+concept as assigning a function expression to a variable and using the variable
+name followed by `()` to invoke the function. You can almost think of
+`outer("Hello")` as the "name" of the function that's returned by `outer`. It's
+the same as if we did this:
 
-Let's tighten this code up once more: instead of assigning the function
-expression to `innerFunction`, let's just return the function expression.
+```js
+const storedFunction = outer("Hello");
+storedFunction("student", "JavaScript");
+//=> "Hello, student! It's a fine day to learn JavaScript"
+```
+
+Note that we are no longer calling `innerFunction` from inside `outer`.
+Amazingly, the code works ***exactly the same***: it ***still*** has access to
+those parent function's variables. It's like a little wormhole in space-time to
+the `outer`'s scope!
+
+We can tighten this code up a bit more: instead of assigning the function
+expression to `innerFunction` and returning that, let's just return the function
+expression.
 
 ```js
 function outer(greeting, msg="It's a fine day to learn") {
   return function(name, lang="Python") {
-    return `${greeting}, ${name}! ${msg} ${lang}`
+    return `${greeting}, ${name}! ${msg} ${lang};`
   }
 }
 
@@ -303,84 +350,92 @@ outer("Hello")("student", "JavaScript")
 //=> "Hello, student! It's a fine day to learn JavaScript"
 ```
 
-Our "inner" function is now a returned **anonymous function**.  To repeat: When
-it came into existence, it inherited the values in `outer`'s parameters
-`greeting` and `msg`. When we invoked `outer` we provided the arguments for
-`greeting` and left `msg` as the default. `outer` then returned an anonymous
-function that had its uses of `greeting` and `msg` set. It was almost as if
-`outer` returned:
-
+To review: we first called `outer`, passing in the argument "Hello". `outer`
+**returned an anonymous function** inside which the default value of `msg` and
+the passed-in value of `greeting` have now been set. It's almost as if `outer`
+returned:
 
 ```js
-return function(name, lang="Python") { // The "inner" function
+function(name, lang="Python") { // The "inner" function
   return `Hello, ${name}! It's a fine day to learn ${lang}`
 }
 ```
 
-We invoked this returned or _"inner" function"_ by adding `()` and passing the
-arguments `"student"` and `"JavaScript"` which were then loaded into `name` and
-`lang` inside the inner function. This filled in the final two values inside of
-the template string and effectively returned:
+We invoked this returned _"inner" function"_ by adding the second set of
+parentheses and passing the arguments `"student"` and `"JavaScript"`, which were
+stored in `name` and `lang`. This filled in the final two values inside of the
+template string and returned:
 
-```js
-  return `Hello, student! It's a fine day to learn JavaScript`
-//=> "Hello, student! It's a fine day to learn JavaScript"
+```bash
+"Hello, student! It's a fine day to learn JavaScript"
 ```
 
-Keep in mind, it's not the case that we have to invoke functions like this:
-
-```js
-outer("Hello")("student", "JavaScript")
-```
-
-We could:
-
-```js
-let storedFunction = outer("Hello")
-storedFunction("student", "JavaScript")
-//=> "Hello, student! It's a fine day to learn JavaScript"
-```
-
-## Define the Term "Closure"
+## Define `Closure`
 
 In the previous example, we could call the "inner" function, the **anonymous
-function** a "closure." It "encloses" the function-level scope of its parent.
-And, like a backpack, it can carry out the knowledge that it saw - _even when
+function**, a "closure." It "encloses" the function-level scope of its parent.
+And, like a backpack, it can carry out the knowledge that it saw — _even when
 you're out of the parent's scope_.
 
-Recall the IIFE discussion, since what's inside an IIFE can't be seen, if we
+Recall the IIFE discussion. Since what's inside an IIFE can't be seen, if we
 wanted to let just tiny bits of information leak back out, we might want to
 pass that information back out, through a closure.
 
 _Note: We're also using destructuring assignment, don't forget your ES6 tools!_
 
 ```js
-let [answer, theBase] = (
+const [answer, theBase] = (
   function(thingToAdd) {
-    let base = 3
+    const base = 3;
     return [
-      function() { return base + thingToAdd },
-      function() { return base }
-    ]
+      function() { return base + thingToAdd; },
+      function() { return base; }
+    ];
   }
 )(2)
-answer() //=> 5
-console.log(`The base was ${theBase()}`)
-// OUTPUT: The base was 3
 ```
 
-## Define the Term "Scope Chain"
+Note that the value on the right of the `=` in the first line is a function
+expression. That function takes a single argument and returns an array that
+contains two functions. The `(2)` after the function expression executes that
+function (instantly), and the two inner functions are stored in the variables
+`answer` and `theBase` by the destructuring assignment.
+
+Go ahead and copy the code above into your browser console and take a look at the
+values of `answer` and `theBase`. You should see the following:
+
+ ```js
+answer; // => ƒ () { return base + thingToAdd; }
+theBase; // => ƒ () { return base; }
+ ```
+
+However, if you try looking at the value of `base` in the console you'll get a
+reference error: the value of `base` is not accessible outside the function it's
+defined in. Now go ahead and _call_ `answer` and `theBase`; you should see the
+following:
+
+```js
+answer(); // => 5
+theBase(); // => 3
+```
+
+The `answer` and `theBase` functions are **closures**; they have access to the
+`base` variable because it's defined in their parent function. When they're
+executed, they "let out" the values of the sum and the original base number,
+allowing us to see them.
+
+## Define `Scope Chain`
 
 The mechanism behind all the cool stuff we just saw is the _scope chain_ which
-allows functions defined in functions to access all their parent scopes'
-variables.  Here's a simple example:
+allows functions defined inside functions (inside functions) to access all their
+parent (and grandparent) scopes' variables. Here's a simple example:
 
 ```js
 function demoChain(name) {
-  let part1 = 'hi'
+  const part1 = 'hi'
   return function() {
-    let part2 = 'there'
-    return function() { // Innermost
+    const part2 = 'there'
+    return function() { 
       console.log(`${part1.toUpperCase()} ${part2} ${name}`);
     }
   }
@@ -389,28 +444,33 @@ function demoChain(name) {
 demoChain("Dr. Stephen Strange")()() //=> HI there Dr. Stephen Strange
 ```
 
-Through the _scope chain_, the function labeled `//Innermost` has access to
-`name`, `part1`, and `part2` when it is called and runs the `console.log()`
-statement. That's awesome wormhole, space-time, magic!
+When it is called, the innermost function has access to `name`, `part1`, and
+`part2` through the _scope chain_. As a result, when the `console.log()`
+statement is run, the string includes all three values. That's awesome wormhole,
+space-time magic!
 
 **LAB**:
 
-* Implement a function called `wrapAdjective`.
-  * It should return a function
-    * This "inner" function should:
-      * take a single parameter that should default to `"special"`. Name it
-        however you wish.
-      * return a `String` of the form "You are ..." where `...` should be the
-        adjective this function received wrapped in visual flair
-  * It should take as parameter a `String` that will be used to create visual flair
-  * You may call the parameter whatever you like, but its default value should
-    be `"*"`
-  * Call example: `let encouragingPromptFunction = wrapAdjective("!!!")`
-* Thus a total call should be:
-      `wrapAdjective("%")("a dedicated programmer") //=> "You are %a dedicated programmer%!"`
-      
-Use the `learn` program to verify you've gotten a working
-implementation. Come back here once you've gotten just this set of tests passing.
+Implement a function called `wrapAdjective`:
+
+- It should return a function
+  - This "inner" function should:
+    - take a single parameter that should default to `"special"`. Name it
+      however you wish.
+    - return a `String` of the form "You are ..." where `...` should be the
+      adjective this function received wrapped in visual flair
+- It should take as parameter a `String` that will be used to create visual flair
+- You may call the parameter whatever you like, but its default value should
+  be `"*"`
+- Call example: `const encouragingPromptFunction = wrapAdjective("!!!")`
+
+Thus a total call should be:
+
+```js
+wrapAdjective("%")("a dedicated programmer") //=> "You are %a dedicated programmer%!"
+```
+
+Run `learn` to verify you've gotten this set of tests passing.
 
 ### Additional Practice in Lab-Driven Development for JavaScript Basics
 
@@ -434,7 +494,7 @@ this module.
 - [StackOverflow — What is meant by 'first class object'?][stackoverflow]
 - [Helephant — Functions are first class objects in javascript (Wayback Machine)][helephant]
 - [2ality — Expressions versus statements in JavaScript][2ality]
-- [MDN - Functions][mdn-fn]
+- [MDN — Functions][mdn-fn]
 - [MDN — Statements and declarations][mdn]
 
 [wiki]: https://en.wikipedia.org/wiki/First-class_function
