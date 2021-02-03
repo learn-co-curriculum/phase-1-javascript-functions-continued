@@ -288,7 +288,7 @@ Let's break this down:
    get stored in `innerFunction`'s `name` and `lang` parameters.
 
 This might look a little bit weird, but it generally makes sense to our
-intuition about scopes: inner things can see their parent outer things. 
+intuition about scopes: inner things can see their parent outer things.
 
 Note that currently, the values of the arguments being passed to `innerFunction`
 are part of the **definition** of `outer`. In order to change those values we
@@ -469,15 +469,6 @@ wrapAdjective("%")("a dedicated programmer") //=> "You are %a dedicated programm
 ```
 
 Run `learn` to verify you've gotten this set of tests passing.
-
-### Additional Practice in Lab-Driven Development for JavaScript Basics
-
-Whew! That's a lot of recap with a lot of mind-bending stuff. Let's make sure
-that we review some of our easier basics.
-
-The remainder of the tests ***are not*** new material. They're here to make
-sure you remember how to work with `Object`s and `Array`s full of functions.
-Use the tests to guide you in feeling confident working with functions.
 
 ## Conclusion
 
