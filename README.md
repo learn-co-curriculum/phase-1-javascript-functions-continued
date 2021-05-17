@@ -342,7 +342,7 @@ expression.
 ```js
 function outer(greeting, msg="It's a fine day to learn") {
   return function(name, lang="Python") {
-    return `${greeting}, ${name}! ${msg} ${lang};`
+    return `${greeting}, ${name}! ${msg} ${lang}`;
   }
 }
 
