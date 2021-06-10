@@ -12,7 +12,6 @@
     "babel-core": "6.26.3",
     "babel-preset-env": "1.7.0",
     "chai": "4.1.2",
-    "file-system": "2.2.2",
     "jsdom": "9.2.1",
     "mocha": "5.2.0",
     "mocha-jsdom": "~1.1.0",
