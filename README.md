@@ -7,7 +7,7 @@
 - Define `function expression`
 - Define `anonymous function`
 - Define a function using a function expression
-- Define an IIFE: `Instantly-Invoked Function Expression`
+- Define an IIFE: `Immediately-Invoked Function Expression`
 - Define `function-level scope`
 - Define `scope chain`
 - Define `closure`
@@ -211,10 +211,10 @@ with the activity that's passed in as the first parameter. If nothing is passed
 in, default to `"go to the office"`. Run `learn` to verify you've gotten this
 set of tests passing before continuing with the lesson.
 
-## Define an IIFE: Instantly-Invoked Function Expression
+## Define an IIFE: Immediately-Invoked Function Expression
 
 Another way to invoke an anonymous function is by creating what's known as an
-`instantly-invoked function expression (IIFE)`.
+`immediately-invoked function expression (IIFE)`.
 
 As a thought experiment, consider what happens here:
 
@@ -226,7 +226,7 @@ We recognize the first `()` as the grouping operator that tells the JavaScript
 engine to interpret the contents as a value — in this case, a function
 expression. What this means is that, in the IIFE statement, the value returned
 by the first set of parentheses is an anonymous function, which can be invoked
-(instantly).
+(immediately).
 
 The second `()` are the `()` of function invocation. When we put them
 immediately after the first set of parentheses, we're invoking the function that
@@ -396,7 +396,7 @@ const array = (
 Note that the value on the right of the `=` in the first line is a function
 expression. That function takes a single argument and returns an array that
 contains two functions. The `(2)` after the function expression executes that
-function (instantly), and the two inner functions are stored in the `array`
+function (immediately), and the two inner functions are stored in the `array`
 variable.
 
 Go ahead and copy the code above into your browser console and take a look at the
