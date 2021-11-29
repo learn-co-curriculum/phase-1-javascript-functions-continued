@@ -457,6 +457,18 @@ space-time magic!
 
 **LAB**:
 
+Implement a function called `saturdayFun`:
+
+- It should define a function
+- It uses a default argument, `'roller-skate'` when no arguments are passed
+  - allows the default argument to be overridden
+
+Implement a function called `mondayWork`:
+
+- It should define a function
+- It uses a default argument, `'go to the office'` when no arguments are passed
+  - allows the default argument to be overridden
+
 Implement a function called `wrapAdjective`:
 
 - It should return a function
