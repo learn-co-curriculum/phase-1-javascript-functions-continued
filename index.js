@@ -12,5 +12,3 @@ function wrapAdjective(huh = '*') {
 
     }
 }
-
-wrapAdjective()
