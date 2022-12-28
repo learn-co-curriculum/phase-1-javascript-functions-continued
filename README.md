@@ -71,7 +71,7 @@ razzle("Methuselah", "T'challah"); //=> Methuselah razzle-dazzles T'challah!
 **LAB**: Implement a function called `saturdayFun`. It should return a `String`
 like `"This Saturday, I want to ....!"` Fill in the `...` with the activity
 that's passed in as the first parameter. If nothing is passed in, default to
-`"roller-skate"`. Run `learn test` to verify you've gotten the first set of
+`"roller-skate"`. Run `npm test` to verify you've gotten the first set of
 tests passing before continuing with the lesson.
 
 ## Define `Hoisting`
@@ -208,7 +208,7 @@ a variable, those assignments are not hoisted either.
 **LAB**: Implement a function expression called `mondayWork`. The function
 should return a `String` like `"This Monday, I will ... ."` Fill in the `...`
 with the activity that's passed in as the first parameter. If nothing is passed
-in, default to `"go to the office"`. Run `learn test` to verify you've gotten
+in, default to `"go to the office"`. Run `npm test` to verify you've gotten
 this set of tests passing before continuing with the lesson.
 
 ## Define an IIFE: Immediately-Invoked Function Expression
@@ -487,7 +487,7 @@ Thus a total call should be:
 wrapAdjective("%")("a dedicated programmer"); //=> "You are %a dedicated programmer%!"
 ```
 
-Run `learn test` to verify you've gotten this set of tests passing.
+Run `npm test` to verify you've gotten this set of tests passing.
 
 ## Conclusion
 
