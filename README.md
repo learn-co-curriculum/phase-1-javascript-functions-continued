@@ -24,6 +24,13 @@ Reinforcing what you read by physically typing in the code will help make sure
 the concepts are locked in. We'll prompt you when it's a good time to shift
 modes from "reading along" to coding.
 
+## Getting Started
+
+If you haven't already, fork and clone this lab into your local environment.
+Remember to **fork** a copy into your GitHub account first, then **clone** from
+that copy. Navigate into its directory in the terminal, then run `code .` to
+open the files in Visual Studio Code.
+
 ## Define a Function Using Function Declaration
 
 In JavaScript, the most common way to define functions is with a **function
@@ -487,7 +494,9 @@ Thus a total call should be:
 wrapAdjective("%")("a dedicated programmer"); //=> "You are %a dedicated programmer%!"
 ```
 
-Run `npm test` to verify you've gotten this set of tests passing.
+Run `npm test` to verify you've gotten this set of tests passing. Once you're
+done, commit and push your changes up to GitHub, then submit your work to Canvas
+using CodeGrade.
 
 ## Conclusion
 
