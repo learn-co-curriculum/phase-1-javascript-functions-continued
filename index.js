@@ -1,9 +1,5 @@
 function saturdayFun(value){
-    if (value == undefined){
-        return "This Saturday, I want to roller-skate!";
-    } else {
-        return `This Saturday, I want to ${value}!`
-    }
+   return value == undefined ? "This Saturday, I want to roller-skate!" : `This Saturday, I want to ${value}!`
 }
 
 
@@ -21,4 +17,4 @@ function wrapAdjective(value){
     }
 }
 
-console.log(wrapAdjective("%")("a dedicated programmer"));
+console.log(saturdayFun());
